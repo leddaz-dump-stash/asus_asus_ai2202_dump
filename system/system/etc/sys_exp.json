@@ -1,0 +1,148 @@
+{
+	"displayname":"sys extreme power saving",
+	"configurations": [
+		{
+			"category":"Temperature",
+			"items": [
+				{
+					"name":"Temperature",
+					"code":"0x48000000",
+					"value":"0",
+					"valueset": [
+					  "0","99"
+					]
+				}
+			]
+		},
+		{
+			"category":"CPU",
+			"items": [
+				{
+					"name":"UCLAMP_CLAMP",
+					"code":"0x40CE4000",
+					"value":"50",
+					"valueset": [
+					  "20","30","40","50","60","70","80"
+					]
+				},
+				{
+					   "name":"/sys/devices/system/cpu/cpufreq/policy0/walt/pl",
+					   "code":"0x41444100",
+					   "value":"0",
+					   "valueset": [
+							   "0","1"
+					   ]
+				},
+				{
+					   "name":"/sys/devices/system/cpu/cpufreq/policy4/walt/pl",
+					   "code":"0x41444000",
+					   "value":"0",
+					   "valueset": [
+							   "0","1"
+					   ]
+				},
+				{
+					   "name":"/sys/devices/system/cpu/cpufreq/policy7/walt/pl",
+					   "code":"0x41444200",
+					   "value":"0",
+					   "valueset": [
+							   "0","1"
+					   ]
+				},
+				{
+					"name":"/sys/module/msm_performance/parameters/cpu_max_freq 0-3",
+					"code":"0x40804100",
+					"value":"1555",
+					"valueset": [
+						"556", "806", "1056", "1228", "1324", "1440", "1555", "1670", "1804"
+					]
+				},
+				{
+					"name":"/sys/module/msm_performance/parameters/cpu_max_freq 4-6",
+					"code":"0x40804000",
+					"value":"1766",
+					"valueset": [
+						"633", "998", "1324", "1651", "1881", "2112", "2342", "2572", "2745"
+					]
+				},
+				{
+					"name":"/sys/module/msm_performance/parameters/cpu_max_freq 7",
+					"code":"0x40804200",
+					"value":"1996",
+					"valueset": [
+						"787", "1171", "1536", "1766", "1996", "2246", "2476", "2707", "2918", "3187"
+					]
+				},
+				{
+					"name":"/sys/devices/system/cpu/cpufreq/policy0/walt/hispeed_load",
+					"code":"0x41440100",
+					"value":"95",
+					"valueset": [
+						"90", "80", "70", "60", "50", "40"
+					]
+				},
+				{
+					"name":"/sys/devices/system/cpu/cpufreq/policy0/walt/hispeed_freq",
+					"code":"0x4143C100",
+					"value":"1056",
+					"valueset": [
+						"1171", "1478", "1785"
+					]
+				},
+				{
+					"name":"/sys/devices/system/cpu/cpufreq/policy4/walt/hispeed_load",
+					"code":"0x41440000",
+					"value":"95",
+					"valueset": [
+						"90", "80", "70", "60", "50", "40"
+					]
+				},
+				{
+					"name":"/sys/devices/system/cpu/cpufreq/policy4/walt/hispeed_freq",
+					"code":"0x4143C000",
+					"value":"1209",
+					"valueset": [
+						"1651", "1881", "2227", "2496"
+					]
+				},
+				{
+					"name":"/sys/devices/system/cpu/cpufreq/policy7/walt/hispeed_load",
+					"code":"0x41440200",
+					"value":"95",
+					"valueset": [
+						"90", "80", "70", "60", "50", "40"
+					]
+				},
+				{
+					"name":"/sys/devices/system/cpu/cpufreq/policy7/walt/hispeed_freq",
+					"code":"0x4143C200",
+					"value":"1401",
+					"valueset": [
+						"1843", "2265", "2688", "2995"
+					]
+				}
+			]
+		},
+		{
+			"category":"GPU",
+			"items": [
+				{
+					"name":"/sys/class/kgsl/kgsl-3d0/max_pwrlevel",
+					"code":"0X42808000",
+					"value":"7",
+					"valueset": [
+						"12", "11", "9", "8", "6", "5", "4", "2", "1", "0"
+					]
+				},
+				{
+					"name":"/sys/class/kgsl/kgsl-3d0/max_clock_mhz",
+					"code":"0X42834000",
+					"value":"515",
+					"valueset": [
+						"900", "220"
+					]
+				}
+			]
+		}
+	]
+}

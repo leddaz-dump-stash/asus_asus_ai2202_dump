@@ -1,0 +1,8 @@
+﻿[{"wallpaper":"default_slideshow_wallpaper01","title":"綠意盎然","description":"一株株茂密的大樹矗立著，直達天際。","author":""},
+{"wallpaper":"default_slideshow_wallpaper02","title":"清澈碧波","description":"海水清澈透明，礁石層次分明。","author":""},
+{"wallpaper":"default_slideshow_wallpaper03","title":"都會動感","description":"每一條曲線，呈現既時尚又流暢的視覺饗宴。","author":""},
+{"wallpaper":"default_slideshow_wallpaper04","title":"年輕色彩","description":"揮灑自我色彩，活出更嶄新的生命力。","author":""},
+{"wallpaper":"default_slideshow_wallpaper05","title":"機能時代","description":"在新機能時代，各種物體元件提更供多元的生活體驗。","author":""},
+{"wallpaper":"default_slideshow_wallpaper06","title":"創意進化","description":"不同元素碰撞產生的火花，帶來更多創意樂趣。","author":""},
+{"wallpaper":"default_slideshow_wallpaper07","title":"活力奔放","description":"年輕動感、活力快樂奔放。","author":""},
+{"wallpaper":"default_slideshow_wallpaper08","title":"展現自我","description":"個性與主張公轉自轉，盡情展現自我色彩。","author":""}]

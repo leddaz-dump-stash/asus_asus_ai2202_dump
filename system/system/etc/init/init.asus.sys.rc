@@ -1,0 +1,136 @@
+on post-fs-data
+    mkdir /data/logcat_log
+    mkdir /data/bootup
+    restorecon_recursive /data/logcat_log
+    restorecon_recursive /data/bootup
+    chown system system /data/logcat_log
+    chown system system /data/bootup
+    chmod 0777 /data/logcat_log
+    chmod 0777 /data/bootup
+
+#ASUS DEBUG: for savelog services
+on property:vendor.logd.qxdmlog.enable=1
+    setprop persist.logd.qxdmlog.enable 1
+
+on property:vendor.logd.qxdmlog.enable=0
+    setprop persist.logd.qxdmlog.enable 0
+
+#ASUS DEBUG: logcat Services to /logcat_log +++
+service logcat-kernel /system/bin/logcat -r 10000 -b kernel -n ${persist.vendor.asus.logcat.filenum:-20} -v threadtime -v printable -f /data/logcat_log/kernel.log
+    class late_start
+    user root
+    group root
+    disabled
+    seclabel u:r:dumpstate:s0
+
+service logcat-radio /system/bin/logcat -r 10000 -b radio -n ${persist.vendor.asus.logcat.filenum:-10} -v time -f /data/logcat_log/logcat-radio.txt
+    class late_start
+    user root
+    group root
+    disabled
+    seclabel u:r:dumpstate:s0
+
+service logcat-events /system/bin/logcat -r 10000 -b events -n ${persist.vendor.asus.logcat.filenum:-10} -v threadtime -f /data/logcat_log/logcat-events.txt
+    class late_start
+    user root
+    group root
+    disabled
+    seclabel u:r:dumpstate:s0
+
+service logcat /system/bin/logcat -b main -b system -b crash -n ${persist.vendor.asus.logcat.filenum:-20} -r 10000 -v threadtime TcpSocketLog:S -f /data/logcat_log/logcat.txt
+    class late_start
+    user root
+    group root
+    disabled
+    seclabel u:r:dumpstate:s0
+
+service logcat-net /system/bin/logcat -r 10000 -b main -s TcpSocketMonitor TcpSocketLog -n 3 -v threadtime -f /data/logcat_log/logcat-net.txt
+    class late_start
+    user root
+    group root
+    disabled
+    seclabel u:r:dumpstate:s0
+#ASUS DEBUG: logcat Services to /logcat_log ---
+
+# For Audio +++
+on property:sys.audio.calibration.rcv=*
+    setprop vendor.audio.calibration.rcv ${sys.audio.calibration.rcv}
+    
+on property:sys.audio.calibration.spk=*
+    setprop vendor.audio.calibration.spk ${sys.audio.calibration.spk}
+    
+on property:vendor.audio.calibration.rcv.value=*
+    setprop sys.audio.calibration.rcv.value ${vendor.audio.calibration.rcv.value}
+    
+on property:vendor.audio.calibration.spk.value=*
+    setprop sys.audio.calibration.spk.value ${vendor.audio.calibration.spk.value}
+
+on property:vendor.audio.calibration=*
+    setprop sys.audio.calibration ${vendor.audio.calibration}
+    
+on property:sys.audio.calibration.value.range=*
+    setprop vendor.audio.calibration.value.range ${sys.audio.calibration.value.range}
+
+on property:ro.product.system.brand=*
+    setprop vendor.audio.system.brand ${ro.product.system.brand}
+    setprop sys.audio.system.brand ${ro.product.system.brand}
+
+on property:vendor.use.audio.eu.parameters=*
+    setprop sys.use.audio.eu.parameters ${vendor.use.audio.eu.parameters}
+# For Audio ---
+
+#ASUS_BSP for CSC calibration +++
+service audio_amp_cal /system/bin/AudioAmpDynamicCalibration 0 0
+    user root
+    group root system audio
+    disabled
+    oneshot
+    seclabel u:r:dumpstate:s0
+
+on property:sys.audio.calibration=1
+    start audio_amp_cal
+#ASUS_BSP for CSC calibration ---
+
+# USB : copy public key when adbon +++
+on property:vendor.factory.adbon=1
+    copy /vendor/factory/adbkey.pub /data/misc/adb/adb_keys
+    chown system shell /data/misc/adb/adb_keys
+    chmod 0640 /data/misc/adb/adb_keys
+# USB : copy public key when adbon ---
+
+on property:vendor.asus.autofota=1
+    setprop vendor.asus.disable_vibrator 2
+    start asus_osinfo
+    setprop vendor.asus.autofota 2
+
+#ABSP for barcode setupwizard check
+on property:persist.vendor.sys.setupwizard.active=*
+    setprop persist.vendor.setupwizard.active ${persist.vendor.sys.setupwizard.active}
+
+
+# For MIS Thermal CDN Collect
+on property:sys.asusconfigupdater.ASUS_AI2201-thermal_policy_cdn_version.cdn=*
+	setprop persist.sys.thermalcdn.ver ${sys.asusconfigupdater.ASUS_AI2201-thermal_policy_cdn_version.cdn}
+
+on property:sys.asusconfigupdater.ASUS_AI2202-thermal_policy_cdn_version.cdn=*
+	setprop persist.sys.thermalcdn.ver ${sys.asusconfigupdater.ASUS_AI2202-thermal_policy_cdn_version.cdn}
+
+#add for game cdn
+on property:sys.asusconfigupdater.game_policy_cdn_version.csv=*
+   setprop persist.sys.asusconfigupdater.game_policy_cdn_version.csv   	   ${sys.asusconfigupdater.game_policy_cdn_version.csv}
+on property:sys.asusconfigupdater.game_perf_para_cdn_1_version.csv=*
+   setprop persist.sys.asusconfigupdater.game_perf_para_cdn_1_version.csv   ${sys.asusconfigupdater.game_perf_para_cdn_1_version.csv}
+
+# ASUS_BSP BootCount +++
+on property:vendor.asus.bootcount=*
+	setprop sys.asus.bootcount ${vendor.asus.bootcount}
+# ASUS_BSP BootCount ---
+
+on property:persist.audio.max_vol_switch=*
+    setprop vendor.audio.max_vol_switch ${persist.audio.max_vol_switch}
+
+on property:persist.audio.media_limit_switch=*
+    setprop vendor.audio.media_limit_switch ${persist.audio.media_limit_switch}
+
+on property:persist.audio.max_vol_media=*
+    setprop vendor.audio.max_vol_media ${persist.audio.max_vol_media}

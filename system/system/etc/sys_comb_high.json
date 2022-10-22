@@ -1,0 +1,249 @@
+{
+	"displayname":"Advanced high",
+	"configurations": [
+		{
+			"category":"Temperature",
+			"items": [
+				{
+					"name":"Temperature",
+					"code":"0x48000000",
+					"value":"7",
+					"valueset": [
+					  "0","1","2","3"
+					]
+				}
+			]
+		},
+		{
+			"category":"CPU",
+			"items": [
+				{
+					"name":"/sys/kernel/msm_performance/parameters/cpu_max_freq 0-3",
+					"code":"0x40804100",
+					"value":"1785",
+					"valueset": [
+						"307", "1075", "1171", "1267", "1363", "1478", "1574", "1689", "1785"
+					]
+				},
+				{
+					"name":"/sys/kernel/msm_performance/parameters/cpu_min_freq 0-3",
+					"code":"0x40800100",
+					"value":"614",
+					"valueset": [
+						"307", "1075", "1171", "1267", "1363", "1478", "1574", "1689", "1785"
+					]
+				},
+				{
+					"name":"/sys/kernel/msm_performance/parameters/cpu_max_freq 4-6",
+					"code":"0x40804000",
+					"value":"2496",
+					"valueset": [
+						"633", "1766", "1881", "1996", "2112", "2227", "2342", "2419", "2496"
+					]
+				},
+				{
+					"name":"/sys/kernel/msm_performance/parameters/cpu_min_freq 4-6",
+					"code":"0x40800000",
+					"value":"633",
+					"valueset": [
+						"633", "1766", "1881", "1996", "2112", "2227", "2342", "2419", "2496"
+					]
+				},
+				{
+					"name":"/sys/kernel/msm_performance/parameters/cpu_max_freq 7",
+					"code":"0x40804200",
+					"value":"2995",
+					"valueset": [
+						"806", "2169", "2284", "2400", "2515", "2630", "2726",  "2822", "2841", "2995"  
+					]
+				},
+				{
+					"name":"/sys/kernel/msm_performance/parameters/cpu_min_freq 7",
+					"code":"0x40800200",
+					"value":"806",
+					"valueset": [
+						"806", "2169", "2284", "2400", "2515", "2630", "2726",  "2822", "2841", "2995" 
+					]
+				},
+				{
+					"name":"/proc/sys/walt/sched_downmigrate",
+					"code":"0x40C20000",
+					"value":"55",
+					"valueset": [
+						"100", "90", "80", "70", "60", "50"
+					]
+				},
+				{
+					"name":"/proc/sys/walt/sched_upmigrate",
+					"code":"0x40C1C000",
+					"value":"65",
+					"valueset": [
+						"100", "90", "80", "70", "60", "50"
+					]
+				},
+				{
+					"name":"/proc/sys/walt/sched_group_downmigrate",
+					"code":"0x40C58000",
+					"value":"55",
+					"valueset": [
+						"100", "90", "80", "70", "60", "50"
+					]
+				},
+				{
+					"name":"/proc/sys/walt/sched_group_upmigrate",
+					"code":"0x40C54000",
+					"value":"65",
+					"valueset": [
+						"100", "90", "80", "70", "60", "50"
+					]
+				},
+				{
+					"name":"/sys/devices/system/cpu/cpufreq/policy0/walt/hispeed_load",
+					"code":"0x41440100",
+					"value":"30",
+					"valueset": [
+						"90", "80", "70", "60", "50", "40", "30"
+					]
+				},
+				{
+					"name":"/sys/devices/system/cpu/cpufreq/policy0/walt/hispeed_freq",
+					"code":"0x4143C100",
+					"value":"1574",
+					"valueset": [
+						"1363", "1574", "1785"
+					]
+				},
+				{
+					"name":"/sys/devices/system/cpu/cpufreq/policy4/walt/hispeed_load",
+					"code":"0x41440000",
+					"value":"30",
+					"valueset": [
+						"90", "80", "70", "60", "50", "40", "30"
+					]
+				},
+				{
+					"name":"/sys/devices/system/cpu/cpufreq/policy4/walt/hispeed_freq",
+					"code":"0x4143C000",
+					"value":"1651",
+					"valueset": [
+						"1881", "2112", "2496"
+					]
+				},
+				{
+					"name":"/sys/devices/system/cpu/cpufreq/policy7/walt/hispeed_load",
+					"code":"0x41440200",
+					"value":"30",
+					"valueset": [
+						"90", "80", "70", "60", "50", "40", "30"
+					]
+				},
+				{
+					"name":"/sys/devices/system/cpu/cpufreq/policy7/walt/hispeed_freq",
+					"code":"0x4143C200",
+					"value":"1612",
+					"valueset": [
+						"2284", "2630", "2995"
+					]
+				}
+			]
+		},
+		{
+			"category":"GPU",
+			"items": [
+				{
+					"name":"/sys/class/kgsl/kgsl-3d0/max_pwrlevel",
+					"code":"0X42808000",
+					"value":"0",
+					"valueset": [
+						"11", "10", "9", "7", "6", "5", "3", "2", "1", "0"
+					]
+				},
+				{
+					"name":"/sys/class/kgsl/kgsl-3d0/min_pwrlevel",
+					"code":"0X42804000",
+					"value":"11",
+					"valueset": [
+						"11", "10", "9", "7", "6", "5", "3", "2", "1", "0"
+					]
+				}
+			]
+		},
+		{
+			"category":"IO",
+			"items": [
+				{
+					"name":"/sys/devices/system/cpu/bus_dcvs/LLCC/190b6400.qcom,bwmon-llcc/io_percent",
+					"code":"0x41834000",
+					"value":"30",
+					"valueset": [
+						"90","80","70","60","50","40","30","20","10"
+					]
+				},
+				{
+					"name":"/sys/devices/system/cpu/bus_dcvs/DDR/19091000.qcom,bwmon-ddr/io_percent",
+					"code":"0x43020000",
+					"value":"30",
+					"valueset": [
+						"90","80","70","60","50","40","30","20","10"
+					]
+				},
+				{
+					"name":"/sys/devices/system/cpu/bus_dcvs/L3/soc:qcom,memlat:l3:silver/min_freq",
+					"code":"0x43400000",
+					"value":"14592",
+					"valueset": [
+						"3072","4224","6336","7296","9216","10944","12672","14592","15552","16512"
+					]
+				},
+				{
+					"name":"/sys/devices/system/cpu/bus_dcvs/L3/soc:qcom,memlat:l3:silver/ipm_ceil",
+					"code":"0x43404000",
+					"value":"4000",
+					"valueset": [
+						"400","1000","2000","4000","8000","16000"
+					]
+				},
+				{
+					"name":"/sys/devices/system/cpu/bus_dcvs/L3/soc:qcom,memlat:l3:gold/ipm_ceil",
+					"code":"0x43408000",
+					"value":"4000",
+					"valueset": [
+						"400","1000","2000","4000","8000","16000"
+					]
+				},
+				{
+					"name":"/sys/devices/system/cpu/bus_dcvs/LLCC/soc:qcom,memlat:llcc:silver/ipm_ceil",
+					"code":"0x43420000",
+					"value":"4000",
+					"valueset": [
+						"400","1000","2000","4000","8000","16000"
+					]
+				},
+				{
+					"name":"/sys/devices/system/cpu/bus_dcvs/LLCC/soc:qcom,memlat:llcc:gold/ipm_ceil",
+					"code":"0x43424000",
+					"value":"4000",
+					"valueset": [
+						"400","1000","2000","4000","8000","16000"
+					]
+				},
+				{
+					"name":"/sys/devices/system/cpu/bus_dcvs/DDR/soc:qcom,memlat:ddr:silver/ipm_ceil",
+					"code":"0x43434000",
+					"value":"4000",
+					"valueset": [
+						"400","1000","2000","4000","8000","16000"
+					]
+				},
+				{
+					"name":"/sys/devices/system/cpu/bus_dcvs/DDR/soc:qcom,memlat:ddr:gold/ipm_ceil",
+					"code":"0x43438000",
+					"value":"4000",
+					"valueset": [
+						"400","1000","2000","4000","8000","16000"
+					]
+				}
+			]
+		}
+	]
+}

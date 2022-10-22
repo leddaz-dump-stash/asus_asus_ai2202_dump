@@ -1,0 +1,8 @@
+﻿[{"wallpaper":"default_slideshow_wallpaper01","title":"绿意盎然","description":"一株株茂密的大树矗立着，直达天际。","author":""},
+{"wallpaper":"default_slideshow_wallpaper02","title":"清澈碧波","description":"海水清澈透明，礁石层次分明。","author":""},
+{"wallpaper":"default_slideshow_wallpaper03","title":"都会动感","description":"每一条曲线，呈现既时尚又流畅的视觉盛宴。","author":""},
+{"wallpaper":"default_slideshow_wallpaper04","title":"年轻色彩","description":"挥洒自我色彩，活出更崭新的生命力。","author":""},
+{"wallpaper":"default_slideshow_wallpaper05","title":"机能时代","description":"在新机能时代，各种物体组件提更供多元的生活体验。","author":""},
+{"wallpaper":"default_slideshow_wallpaper06","title":"创意进化","description":"不同元素碰撞产生的火花，带来更多创意乐趣。","author":""},
+{"wallpaper":"default_slideshow_wallpaper07","title":"活力奔放","description":"年轻动感、活力快乐奔放。","author":""},
+{"wallpaper":"default_slideshow_wallpaper08","title":"展现自我","description":"个性与主张公转自转，尽情展现自我色彩。","author":""}]

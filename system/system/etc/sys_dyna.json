@@ -1,0 +1,119 @@
+{
+	"displayname":"sys dynamic",
+	"configurations": [
+		{
+			"category":"Temperature",
+			"items": [
+				{
+					"name":"Temperature",
+					"code":"0x48000000",
+					"value":"0",
+					"valueset": [
+					  "0","99"
+					]
+				}
+			]
+		},
+		{
+			"category":"CPU",
+			"items": [
+				{
+					"name":"/sys/kernel/msm_performance/parameters/cpu_max_freq 4-6",
+					"code":"0x40804000",
+					"value":"2572",
+					"valueset": [
+						"633", "1766", "1881", "1996", "2112", "2227", "2342", "2419", "2496", "2745"
+					]
+				},
+				{
+					"name":"/sys/kernel/msm_performance/parameters/cpu_max_freq 7",
+					"code":"0x40804200",
+					"value":"2822",
+					"valueset": [
+						"806", "2169", "2284", "2400", "2515", "2630", "2726",  "2822", "2841", "2995", "3187"
+					]
+				},
+				{
+					"name":"UCLAMP_CLAMP",
+					"code":"0x40CE4000",
+					"value":"75",
+					"valueset": [
+					  "20","30","40","50","60","70","80"
+					]
+				},
+				{
+					   "name":"/sys/devices/system/cpu/cpufreq/policy0/walt/pl",
+					   "code":"0x41444100",
+					   "value":"0",
+					   "valueset": [
+							   "0","1"
+					   ]
+				},
+				{
+					   "name":"/sys/devices/system/cpu/cpufreq/policy4/walt/pl",
+					   "code":"0x41444000",
+					   "value":"0",
+					   "valueset": [
+							   "0","1"
+					   ]
+				},
+				{
+					   "name":"/sys/devices/system/cpu/cpufreq/policy7/walt/pl",
+					   "code":"0x41444200",
+					   "value":"0",
+					   "valueset": [
+							   "0","1"
+					   ]
+				},
+				{
+					"name":"/sys/devices/system/cpu/cpufreq/policy0/walt/hispeed_load",
+					"code":"0x41440100",
+					"value":"90",
+					"valueset": [
+						"90", "80", "70", "60", "50", "40"
+					]
+				},
+				{
+					"name":"/sys/devices/system/cpu/cpufreq/policy0/walt/hispeed_freq",
+					"code":"0x4143C100",
+					"value":"1478",
+					"valueset": [
+						"1171", "1478", "1785"
+					]
+				},
+				{
+					"name":"/sys/devices/system/cpu/cpufreq/policy4/walt/hispeed_load",
+					"code":"0x41440000",
+					"value":"90",
+					"valueset": [
+						"90", "80", "70", "60", "50", "40"
+					]
+				},
+				{
+					"name":"/sys/devices/system/cpu/cpufreq/policy4/walt/hispeed_freq",
+					"code":"0x4143C000",
+					"value":"1996",
+					"valueset": [
+						"1651", "1881", "2227", "2496"
+					]
+				},
+				{
+					"name":"/sys/devices/system/cpu/cpufreq/policy7/walt/hispeed_load",
+					"code":"0x41440200",
+					"value":"90",
+					"valueset": [
+						"90", "80", "70", "60", "50", "40"
+					]
+				},
+				{
+					"name":"/sys/devices/system/cpu/cpufreq/policy7/walt/hispeed_freq",
+					"code":"0x4143C200",
+					"value":"2054",
+					"valueset": [
+						"1843", "2265", "2688", "2995"
+					]
+				}
+			]
+		}
+	]
+}
