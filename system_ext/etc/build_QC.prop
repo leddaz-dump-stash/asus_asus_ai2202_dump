@@ -1,0 +1,4 @@
+ro.product.system_ext.brand=Xiaomi
+ro.product.system_ext.manufacturer=Xiaomi
+ro.product.system_ext.model=ZF
+ro.system_ext.build.fingerprint=ZF/WWZF/ZF:12/SKQ1.220406.001/32.2040.2040.23:user/release-keys

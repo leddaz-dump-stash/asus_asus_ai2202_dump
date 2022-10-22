@@ -1,0 +1,15 @@
+modem.img
+recovery.img
+bootRE/boot.elf
+system/system/app/AsusSetupWizard/AsusSetupWizard.apk
+system/system/priv-app/AsusSettings/AsusSettings.apk
+system/system/priv-app/AsusSystemUI/AsusSystemUI.apk
+system/system/priv-app/AsusTips/AsusTips.apk
+system/system/priv-app/YandexApp/YandexApp.apk
+system/system/priv-app/YandexBrowser/YandexBrowser.apk
+system/system/priv-app/ZF9LiveWallpaper/ZF9LiveWallpaper.apk
+system_ext/apex/com.android.vndk.v30.apex
+vendor/lib64/libQnnGpu.so
+product/app/WebViewGoogle/WebViewGoogle.apk
+product/priv-app/GmsCore/GmsCore.apk
+product/priv-app/Velvet/Velvet.apk
