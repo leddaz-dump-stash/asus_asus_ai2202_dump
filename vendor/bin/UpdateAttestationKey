@@ -1,0 +1,13 @@
+#!/vendor/bin/sh
+
+# start dec_key
+#setprop "debug.key.install" 1
+setprop vendor.atd.keymaster.ready false
+/vendor/bin/install_key_server zf8prov > /data/asuskey.log 2>&1
+sleep 1
+Km=`getprop vendor.atd.keymaster.ready`
+if [ "$Km" == "TRUE" ]; then
+	echo 1
+else
+	echo 0
+fi

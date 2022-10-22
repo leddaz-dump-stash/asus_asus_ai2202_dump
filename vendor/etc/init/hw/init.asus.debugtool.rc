@@ -1,0 +1,212 @@
+on fs
+#    mkdir /asdf
+    write /dev/kmsg "init.asus.debugtool.rc: mount asdf"
+    wait /dev/block/bootdevice/by-name/asdf
+#    exec /system/bin/e2fsck -p /dev/block/bootdevice/by-name/asdf
+    mount ext4 /dev/block/bootdevice/by-name/asdf /asdf nosuid nodev noatime barrier=1
+    chmod 0775 /asdf
+    restorecon_recursive /asdf
+
+    write /dev/kmsg "init.asus.debugtool.rc: mount logbuf"
+    wait /dev/block/bootdevice/by-name/logbuf
+    mount ext4 /dev/block/bootdevice/by-name/logbuf /logbuf nosuid nodev noatime barrier=1
+    chmod 0775 /logbuf
+    restorecon_recursive /logbuf
+
+on boot
+    chmod 0444 /proc/cmdline
+
+on post-fs-data
+	setprop vendor.asus.fota.flag 0
+    start logcat-asdf
+    start logcat-crash
+
+# Add asusdebug
+    chmod 0777 /proc/asusdebug
+
+# Add /data/* folder
+    mkdir /data/vendor/logcat_log
+    mkdir /data/vendor/bootup
+    mkdir -p /data/media/asus_log
+    restorecon_recursive /data/vendor/logcat_log
+    restorecon_recursive /data/vendor/bootup
+
+    chown system system /data/vendor/logcat_log
+    chown system system /data/vendor/bootup
+    chown sdcard_rw sdcard_rw /data/media/asus_log
+
+    chmod 0777 /data/vendor/logcat_log
+    chmod 0777 /data/vendor/bootup
+    chmod 0757 /data/media/asus_log
+
+    chmod 0666 /asdf/ASUSEvtlog.txt
+    chmod 0666 /asdf/ASUSEvtlog_old.txt
+
+# Service Block START ...
+service check-datalog /system/bin/sh /system/bin/init.asus.checkdatalog.sh
+    class main
+    user root 
+    group system
+    oneshot
+    seclabel u:r:dumpstate:s0
+
+on property:persist.vendor.asus.startlog=1
+    setprop vendor.asus.startlog 1
+    #setprop logd.klogd true
+    #start check_last
+    start check-datalog
+    write /sys/module/msm_rtb/parameters/enable 1
+
+on property:persist.vendor.asus.startlog=0
+    setprop vendor.asus.startlog 0
+    #setprop logd.klogd false
+    #start check_last
+    start check-datalog
+    write /sys/module/msm_rtb/parameters/enable 0
+
+on property:persist.vendor.sys.downloadmode.enable=0
+    write /sys/kernel/dload/emmc_dload 1
+    write /sys/kernel/dload/dload_mode mini
+
+on property:persist.vendor.sys.downloadmode.enable=1
+    write /sys/kernel/dload/emmc_dload 1
+    write /sys/kernel/dload/dload_mode full
+
+#ASUS_BSP LiJen : for charger mode logcat +++
+service logcat-charger /vendor/bin/asuslogcat -b kernel -b main -b system  -b crash -r 10000 -n 1 -v threadtime -f /asdf/charger-logcat.txt
+    class late_start
+    disabled
+seclabel u:r:savelogmtp:s0
+#ASUS_BSP LiJen : for charger mode logcat ---
+
+service asus_chk_asdf /system/vendor/bin/sh /system/vendor/bin/init.asus.check_asdf.sh
+    user root
+    group root
+    disabled
+    oneshot
+    seclabel u:r:savelogmtp:s0
+
+on property:sys.boot_completed=1
+    start asus_chk_asdf
+    start asus_change_binder_debug
+    setprop vendor.asus.fota.flag 1
+
+#logcat Services to /asdf
+service logcat-asdf /vendor/bin/asuslogcat -b kernel -b main -b system -b crash -r 10000 -n 5 -v threadtime -f /asdf/asdf-logcat.txt
+    class main
+    disabled
+    oneshot
+    seclabel u:r:savelogmtp:s0
+
+#logcat fota Services to /asdf
+service logcat-fota_asdf /vendor/bin/asuslogcat -b kernel -b main -b system -b crash -r 10000 -n 2 -v threadtime -f /asdf/asdf-fota_logcat.txt
+    class main
+    disabled
+    oneshot
+    seclabel u:r:savelogmtp:s0
+
+service logcat-crash /vendor/bin/asuslogcat -b crash -r 1000 -n 2 -v threadtime -v printable -f /asdf/logcat-crash.txt
+    class main
+    disabled
+    oneshot
+    seclabel u:r:savelogmtp:s0
+
+on property:sys.boot_completed=1 && property:ro.boot.force_logcat_asdf=0
+    stop logcat-asdf
+
+on property:persist.vendor.asus.fota.status=1 && property:vendor.asus.fota.flag=0
+    start logcat-fota_asdf
+    setprop vendor.asus.fota.flag 2
+
+on property:sys.boot_completed=1 && property:vendor.asus.fota.flag=2
+    stop logcat-fota_asdf
+    setprop persist.vendor.asus.fota.status 0
+    setprop vendor.asus.fota.flag 1
+
+# ASUSLogTool save log
+service savelogmtp /vendor/bin/sh /vendor/bin/savelogmtp.sh
+    class late_start
+    user root
+    group root shell system media_rw sdcard_rw wifi
+    oneshot
+    disabled
+    seclabel u:r:savelogmtp:s0
+
+on property:persist.vendor.asus.savelogmtp.folder=*
+	setprop vendor.asus.savelogmtp.folder ${persist.vendor.asus.savelogmtp.folder}
+
+service savelogmtp_sys /system/bin/sh /system/bin/savelogmtp_sys.sh
+    class late_start
+    user root
+    group root system media_rw
+    oneshot
+    disabled
+    seclabel u:r:dumpstate:s0
+
+service log_mover /system/bin/sh /system/bin/log_mover.sh
+    class late_start
+    user root
+    group root system media_rw
+    oneshot
+    disabled
+    seclabel u:r:dumpstate:s0
+
+# ASUSLogTool - Binder Debug
+on property:persist.vendor.asus.binderdebug.enable=*
+    start asus_change_binder_debug
+
+service asus_change_binder_debug /vendor/bin/sh /vendor/bin/init.asus.changebinder.sh
+    class main
+    user root 
+    group system
+    oneshot
+    seclabel u:r:savelogmtp:s0
+
+service cscclearlog /system/bin/sh /system/bin/cscclearlog.sh
+    class main
+    user root
+    group root
+    oneshot
+    seclabel u:r:dumpstate:s0
+
+# UTS services
+service savelogs /system/bin/sh /system/bin/savelogs.sh
+    class late_start
+    user root
+    group root system media_rw sdcard_rw
+    oneshot
+    disabled
+    seclabel u:r:dumpstate:s0
+
+service vendor_savelogs /vendor/bin/sh /vendor/bin/vendor_savelogs.sh
+    class late_start
+    user root
+    group root shell system media_rw sdcard_rw wifi
+    oneshot
+    disabled
+    seclabel u:r:savelogmtp:s0
+
+service savelogscomplete /system/bin/sh /system/vendor/bin/savelogs_complete.sh
+    user root
+    group root
+    oneshot
+    disabled
+    seclabel u:r:dumpstate:s0
+
+on property:persist.vendor.asus.savelogs.complete=1
+	start savelogscomplete
+
+on property:persist.vendor.asus.savelogs=*
+	start vendor_savelogs
+#	start savelogs
+
+on property:vendor.asus.clearlog=1
+    start cscclearlog
+
+on property:persist.vendor.asus.adsp.ramdump=1
+	write /sys/class/remoteproc/remoteproc1/recovery "disabled"
+	write /sys/class/remoteproc/remoteproc4/recovery "disabled"
+
+on property:persist.vendor.asus.adsp.ramdump=0
+	write /sys/class/remoteproc/remoteproc1/recovery "enabled"
+	write /sys/class/remoteproc/remoteproc4/recovery "enabled"
